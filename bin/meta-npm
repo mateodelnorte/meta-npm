@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+let loaded = false;
+
+if (loaded) return process.kill();
+
+const program = require('commander');
+const debug = require('debug')('meta-npm');
+
+program
+  .command('install', 'npm install meta and child repositories')
+  .parse(process.argv);
+
+loaded = true;
