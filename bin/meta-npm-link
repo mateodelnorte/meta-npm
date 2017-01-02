@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
+const async = require('async');
+const execSync = require('child_process').execSync;
 const fs = require('fs');
 const program = require('commander');
-const debug = require('debug')('meta-npm-install');
+const debug = require('debug')('meta-npm-link');
 const loop = require('loop-things');
 const path = require('path');
 const util = require('util');
 
 if (process.argv[2] === '--help') {
-  return console.log(`\n  usage:\n\n    meta npm install\n`);
+  return console.log(`\n  usage:\n\n    meta npm link\n`);
 }
-
-const install = require('../lib/install');
 
 var meta = null; 
 var buffer = null;
@@ -37,9 +37,32 @@ if (buffer) {
 const projects = meta.projects;
 const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
 
-folders.unshift(process.cwd());
-
 loop({
-  command: 'npm install',
+  command: 'npm link',
   directories: folders
+}, (err) => {
+
+  console.log();
+
+  const packageJsons = folders.map((folder) => {
+    return require(path.join(folder, 'package.json'));
+  });
+
+  const names = packageJsons.map((p) => { return p.name; });
+
+  async.mapSeries(names, (name, cb) => {
+    try {
+      execSync(`npm link ${name}`, { stdio: 'inherit' });
+      console.log();
+    } catch (err) {
+      return cb(err);
+    }
+    return cb();
+  }, (err) => {
+    if (err) throw err;
+
+    console.log('meta npm link complete');
+
+  }); 
+
 });
