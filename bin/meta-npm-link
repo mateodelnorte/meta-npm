@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const async = require('async');
+const chalk = require('chalk');
 const execSync = require('child_process').execSync;
 const fs = require('fs');
 const program = require('commander');
@@ -37,6 +38,8 @@ if (buffer) {
 const projects = meta.projects;
 const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
 
+console.log(`\nlinking child projects globally`);
+
 loop({
   command: 'npm link',
   directories: folders
@@ -50,18 +53,19 @@ loop({
 
   const names = packageJsons.map((p) => { return p.name; });
 
+  console.log(`linking child projects to ${process.cwd()}\n`);
+
   async.mapSeries(names, (name, cb) => {
     try {
+      console.log(chalk.cyan(`${name}:\n`));
       execSync(`npm link ${name}`, { stdio: 'inherit' });
-      console.log();
     } catch (err) {
       return cb(err);
     }
+    console.log(chalk.green(`${name} ✓\n`));
     return cb();
   }, (err) => {
     if (err) throw err;
-
-    console.log('meta npm link complete');
 
   }); 
 
