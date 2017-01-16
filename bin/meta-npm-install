@@ -11,8 +11,6 @@ if (process.argv[2] === '--help') {
   return console.log(`\n  usage:\n\n    meta npm install\n`);
 }
 
-const install = require('../lib/install');
-
 var meta = null; 
 var buffer = null;
 
