@@ -2,13 +2,15 @@
 
 const async = require('async');
 const chalk = require('chalk');
-const execSync = require('child_process').execSync;
+const exec = require('meta-exec');
 const fs = require('fs');
 const program = require('commander');
 const debug = require('debug')('meta-npm-link');
+const getPackageDependencies = require('../lib/getPackageDependencies');
 const loop = require('loop-things');
 const path = require('path');
 const util = require('util');
+const _ = require('lodash');
 
 if (process.argv[2] === '--help') {
   return console.log(`\n  usage:\n\n    meta npm link\n`);
@@ -36,34 +38,55 @@ if (buffer) {
 }
 
 const projects = meta.projects;
-const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
+
+const packages = [];
+
+_.forEach(Object.keys(projects), (folder) => {
+
+  const childPackageJson = require(path.join(metaLocation, '..', folder, 'package.json'));
+
+  packages.push({
+    name: childPackageJson.name,
+    folder: path.join(metaLocation, '..', folder),
+    dependencies: childPackageJson.dependencies,
+    devDependencies: childPackageJson.devDependencies,
+  });
+
+});
+
+const metaPackageJson = require(path.join(metaLocation, '..', 'package.json'));
+
+packages.push({
+  name: metaPackageJson.name,
+  folder: path.join(metaLocation, '..'),
+  dependencies: metaPackageJson.dependencies,
+  devDependencies: metaPackageJson.devDependencies,
+});
+
+const dependencies = getPackageDependencies(packages);
+
+const uniqueFoldersToLink = _.union(dependencies.map((d) => { return d.sourceFolder; }));
 
 console.log(`\nlinking child projects globally`);
 
 loop({
   command: 'npm link',
-  directories: folders
+  directories: uniqueFoldersToLink
 }, (err) => {
 
   console.log();
 
-  const packageJsons = folders.map((folder) => {
-    return require(path.join(folder, 'package.json'));
-  });
+  console.log(`linking child projects`);
 
-  const names = packageJsons.map((p) => { return p.name; });
-
-  console.log(`linking child projects to ${process.cwd()}\n`);
-
-  async.mapSeries(names, (name, cb) => {
-    try {
-      console.log(chalk.cyan(`${name}:\n`));
-      execSync(`npm link ${name}`, { stdio: 'inherit' });
-    } catch (err) {
-      return cb(err);
-    }
-    console.log(chalk.green(`${name} ✓\n`));
-    return cb();
+  async.mapSeries(dependencies, (dependency, cb) => {
+    exec({
+      command: `npm link ${dependency.source}`,
+      dir: dependency.targetFolder,
+      displayDir: `${dependency.source}->${dependency.target}`,
+    }, (err) => {
+      if (err) return cb(err);
+      return cb();
+    });
   }, (err) => {
     if (err) throw err;
 

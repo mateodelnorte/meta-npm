@@ -1,6 +1,6 @@
 {
   "name": "meta-npm",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "npm plugin for meta",
   "main": "index.js",
   "bin": {
@@ -33,6 +33,8 @@
     "chalk": "^1.1.3",
     "commander": "^2.9.0",
     "debug": "^2.3.3",
-    "loop-things": "0.0.21"
+    "lodash": "^4.17.4",
+    "loop-things": "0.0.21",
+    "meta-exec": "0.0.0"
   }
 }
