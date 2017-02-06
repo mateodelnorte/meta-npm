@@ -29,9 +29,9 @@ npm plugin for [meta](https://github.com/mateodelnorte/meta)
 
   Commands:
 
-    install     npm install meta and child repositories
-    link        npm link all child packages used within meta repo or other child repos
-    help [cmd]  display help for [cmd]
+    install       npm install meta and child repositories
+    link [--all]  npm link all child packages used within meta repo or other child repos
+    help [cmd]    display help for [cmd]
 
   Options:
 
