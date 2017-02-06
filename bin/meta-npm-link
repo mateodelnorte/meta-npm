@@ -13,7 +13,13 @@ const util = require('util');
 const _ = require('lodash');
 
 if (process.argv[2] === '--help') {
-  return console.log(`\n  usage:\n\n    meta npm link\n`);
+  return console.log(`\n  usage:\n\n    meta npm link [--all]\n\n  options: \n\n    --all   links all child repositories into meta repo whether listed as dependencies or not.\n`);
+}
+
+let all = false;
+
+if (process.argv[2] === '--all') {
+  all = true;
 }
 
 var meta = null; 
@@ -38,12 +44,16 @@ if (buffer) {
 }
 
 const projects = meta.projects;
-
+const metaPackageJson = require(path.join(metaLocation, '..', 'package.json'));
 const packages = [];
 
 _.forEach(Object.keys(projects), (folder) => {
 
   const childPackageJson = require(path.join(metaLocation, '..', folder, 'package.json'));
+
+  if (all) {
+    metaPackageJson.dependencies[childPackageJson.name] = null;
+  }
 
   packages.push({
     name: childPackageJson.name,
@@ -54,8 +64,6 @@ _.forEach(Object.keys(projects), (folder) => {
 
 });
 
-const metaPackageJson = require(path.join(metaLocation, '..', 'package.json'));
-
 packages.push({
   name: metaPackageJson.name,
   folder: path.join(metaLocation, '..'),
@@ -65,7 +73,7 @@ packages.push({
 
 const dependencies = getPackageDependencies(packages);
 
-const uniqueFoldersToLink = _.union(dependencies.map((d) => { return d.sourceFolder; }));
+let uniqueFoldersToLink = _.union(dependencies.map((d) => { return d.sourceFolder; }));
 
 console.log(`\nlinking child projects globally`);
 

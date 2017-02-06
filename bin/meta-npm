@@ -9,7 +9,7 @@ const debug = require('debug')('meta-npm');
 
 program
   .command('install', 'npm install meta and child repositories')
-  .command('link', 'npm link child repositories where used within child and meta repositories')
+  .command('link [--all]', 'npm link child repositories where used within child and meta repositories')
   .parse(process.argv);
 
 loaded = true;
