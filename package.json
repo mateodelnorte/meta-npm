@@ -1,10 +1,11 @@
 {
   "name": "meta-npm",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "npm plugin for meta",
   "main": "index.js",
   "bin": {
     "meta-npm": "./bin/meta-npm",
+    "meta-npm-clean": "./bin/meta-npm-clean",
     "meta-npm-install": "./bin/meta-npm-install"
   },
   "scripts": {
@@ -34,7 +35,7 @@
     "commander": "^2.9.0",
     "debug": "^2.3.3",
     "lodash": "^4.17.4",
-    "loop-things": "0.0.21",
+    "loop-things": "0.0.22",
     "meta-exec": "0.0.0"
   }
 }

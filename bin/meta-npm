@@ -8,6 +8,7 @@ const program = require('commander');
 const debug = require('debug')('meta-npm');
 
 program
+  .command('clean', 'delete the node_modules folder in meta and child repositories')
   .command('install', 'npm install meta and child repositories')
   .command('link [--all]', 'npm link child repositories where used within child and meta repositories')
   .parse(process.argv);
