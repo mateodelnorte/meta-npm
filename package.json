@@ -1,12 +1,14 @@
 {
   "name": "meta-npm",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "npm plugin for meta",
   "main": "index.js",
   "bin": {
     "meta-npm": "./bin/meta-npm",
     "meta-npm-clean": "./bin/meta-npm-clean",
-    "meta-npm-install": "./bin/meta-npm-install"
+    "meta-npm-install": "./bin/meta-npm-install",
+    "meta-npm-link": "./bin/meta-npm-link",
+    "meta-npm-run": "./bin/meta-npm-run"
   },
   "scripts": {
     "test": "npm test"
