@@ -3,7 +3,7 @@
 const fs = require('fs');
 const program = require('commander');
 const debug = require('debug')('meta-npm-run');
-const loop = require('loop-things');
+const loop = require('loop');
 const path = require('path');
 const util = require('util');
 
