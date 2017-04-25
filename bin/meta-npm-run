@@ -1,11 +1,8 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const program = require('commander');
 const debug = require('debug')('meta-npm-run');
-const loop = require('loop');
-const path = require('path');
-const util = require('util');
+const metaLoop = require('meta-loop');
 
 const usage = `\n  usage:\n\n    meta npm run <command>\n`;
 
@@ -18,33 +15,4 @@ const command = process.argv[2] === 'blank' ?
 
 if ( ! command || ! repoUrl) return console.log(usage);
 
-var meta = null; 
-var buffer = null;
-
-const metaLocation = path.join(process.cwd(), '.meta');
-
-try {
-  buffer = fs.readFileSync(metaLocation);
-  debug(`.meta file found at ${metaLocation}`);
-} catch (e) {
-  debug(`no .meta file found at ${metaLocation}: ${e}`);
-}
-
-if (buffer) {
-  try {
-    meta = JSON.parse(buffer.toString());
-    debug(`.meta file contents parsed: ${util.inspect(meta, null, Infinity)}`);
-  } catch (e) {
-    debug(`error parsing .meta JSON: ${e}`);
-  }
-}
-
-const projects = meta.projects;
-const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
-
-folders.unshift(process.cwd());
-
-loop({
-  command: 'npm run ${command}',
-  directories: folders
-});
+metaLoop('npm run ${command}');
