@@ -10,5 +10,5 @@ if (process.argv[2] === '--help') {
 }
 
 metaLoop('npm install', { test: (folder) => {
-  return fs.existsSync(path.join(process.cwd(), folder, 'package.json')) === false;
+  return fs.existsSync(path.join(process.cwd(), folder, 'package.json')) === true;
 }});
