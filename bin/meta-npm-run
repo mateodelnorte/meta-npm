@@ -13,6 +13,6 @@ const command = process.argv[2] === 'blank' ?
                       process.argv[3] :
                       process.argv[2];
 
-if ( ! command || ! repoUrl) return console.log(usage);
+if ( ! command) return console.log(usage);
 
 metaLoop('npm run ${command}');
