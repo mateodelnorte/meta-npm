@@ -15,4 +15,4 @@ const command = process.argv[2] === 'blank' ?
 
 if ( ! command) return console.log(usage);
 
-metaLoop('npm run ${command}');
+metaLoop(`npm run ${command}`);
