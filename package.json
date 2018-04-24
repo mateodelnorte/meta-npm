@@ -1,6 +1,6 @@
 {
   "name": "meta-npm",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "npm plugin for meta",
   "main": "index.js",
   "bin": {
