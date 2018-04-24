@@ -1,6 +1,6 @@
 {
   "name": "meta-npm",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "npm plugin for meta",
   "main": "index.js",
   "bin": {
@@ -8,7 +8,7 @@
     "meta-npm-clean": "./bin/meta-npm-clean",
     "meta-npm-install": "./bin/meta-npm-install",
     "meta-npm-link": "./bin/meta-npm-link",
-    "meta-npm-outdated": "./bin/meta-npm-oudated",
+    "meta-npm-outdated": "./bin/meta-npm-outdated",
     "meta-npm-publish": "./bin/meta-npm-publish",
     "meta-npm-run": "./bin/meta-npm-run",
     "meta-npm-symlink": "./bin/meta-npm-symlink"
