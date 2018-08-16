@@ -25,13 +25,25 @@ if (process.argv[2] === '--all') {
 
 var meta = getMetaFile();
 const metaLocation = path.join(process.cwd(), '.meta');
-const metaPackageJson = require(path.join(metaLocation, '..', 'package.json'));
+let metaPackageJson;
+
+try{
+  metaPackageJson = require(path.join(metaLocation, '..', 'package.json'));
+} catch(e) {
+  metaPackageJson = {};
+}
+
 const packages = [];
 const projects = meta.projects;
 
 _.forEach(Object.keys(projects), (folder) => {
 
-  const childPackageJson = require(path.join(metaLocation, '..', folder, 'package.json'));
+  let childPackageJson;
+  try{
+    childPackageJson = require(path.join(metaLocation, '..', folder, 'package.json'));
+  } catch(e) {
+    return;
+  }
 
   if (all) {
     metaPackageJson.dependencies[childPackageJson.name] = null;
