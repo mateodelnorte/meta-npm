@@ -1,5 +1,7 @@
 # meta-npm
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mateodelnorte/meta-npm.svg)](https://greenkeeper.io/)
+
 npm plugin for [meta](https://github.com/mateodelnorte/meta)
 
 ## Usage
