@@ -42,13 +42,13 @@
     "find-module-bin": "^0.0.2",
     "get-meta-file": "^0.0.5",
     "lodash": "^4.17.4",
-    "loop": "^3.0.6",
+    "loop": "^3.1.1",
     "meta-exec": "^0.0.8",
     "meta-loop": "^0.0.5",
     "symlink-meta-dependencies": "^0.0.3"
   },
   "devDependencies": {
-    "mocha": "^3.5.0",
+    "mocha": "^5.2.0",
     "should": "^11.2.1"
   }
 }
