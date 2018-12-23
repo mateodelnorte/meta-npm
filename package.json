@@ -43,7 +43,7 @@
     "get-meta-file": "^1.0.0",
     "lodash": "^4.17.4",
     "loop": "^3.1.1",
-    "meta-exec": "^0.0.8",
+    "meta-exec": "^1.0.0",
     "meta-loop": "^1.0.0",
     "symlink-meta-dependencies": "^0.0.3"
   },
