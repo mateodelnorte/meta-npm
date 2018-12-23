@@ -44,7 +44,7 @@
     "lodash": "^4.17.4",
     "loop": "^3.1.1",
     "meta-exec": "^0.0.8",
-    "meta-loop": "^0.0.5",
+    "meta-loop": "^0.0.8",
     "symlink-meta-dependencies": "^0.0.3"
   },
   "devDependencies": {
