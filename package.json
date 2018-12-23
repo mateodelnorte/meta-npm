@@ -40,7 +40,7 @@
     "commander": "^2.9.0",
     "debug": "^2.3.3",
     "find-module-bin": "^0.0.2",
-    "get-meta-file": "^0.0.5",
+    "get-meta-file": "^1.0.0",
     "lodash": "^4.17.4",
     "loop": "^3.1.1",
     "meta-exec": "^0.0.8",
