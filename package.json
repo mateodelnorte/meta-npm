@@ -48,7 +48,7 @@
     "symlink-meta-dependencies": "^0.0.3"
   },
   "devDependencies": {
-    "mocha": "6.0.1",
+    "mocha": "6.0.2",
     "should": "13.2.3"
   }
 }
