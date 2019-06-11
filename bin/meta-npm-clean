@@ -12,11 +12,13 @@ if (process.argv[2] === '--help') {
 
 const meta = getMetaFile();
 const projects = meta.projects;
-const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
+const folders = Object.keys(projects).map(folder => {
+  return path.resolve(folder);
+});
 
 folders.unshift(process.cwd());
 
 loop({
   command: 'rm -rf node_modules',
-  directories: folders.reverse()
+  directories: folders.reverse(),
 });

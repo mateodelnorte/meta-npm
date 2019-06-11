@@ -14,7 +14,9 @@ const util = require('util');
 const _ = require('lodash');
 
 if (process.argv[2] === '--help') {
-  return console.log(`\n  usage:\n\n    meta npm link [--all]\n\n  options: \n\n    --all   links all child repositories into meta repo whether listed as dependencies or not.\n`);
+  return console.log(
+    `\n  usage:\n\n    meta npm link [--all]\n\n  options: \n\n    --all   links all child repositories into meta repo whether listed as dependencies or not.\n`
+  );
 }
 
 let all = false;
@@ -29,8 +31,7 @@ const metaPackageJson = require(path.join(metaLocation, '..', 'package.json'));
 const packages = [];
 const projects = meta.projects;
 
-_.forEach(Object.keys(projects), (folder) => {
-
+_.forEach(Object.keys(projects), folder => {
   const childPackageJson = require(path.join(metaLocation, '..', folder, 'package.json'));
 
   if (all) {
@@ -43,7 +44,6 @@ _.forEach(Object.keys(projects), (folder) => {
     dependencies: childPackageJson.dependencies,
     devDependencies: childPackageJson.devDependencies,
   });
-
 });
 
 packages.push({
@@ -55,31 +55,42 @@ packages.push({
 
 const dependencies = getPackageDependencies(packages);
 
-let uniqueFoldersToLink = _.union(dependencies.map((d) => { return d.sourceFolder; }));
+let uniqueFoldersToLink = _.union(
+  dependencies.map(d => {
+    return d.sourceFolder;
+  })
+);
 
 console.log(`\nlinking child projects globally`);
 
-loop({
-  command: 'npm link',
-  directories: uniqueFoldersToLink
-}, (err) => {
+loop(
+  {
+    command: 'npm link',
+    directories: uniqueFoldersToLink,
+  },
+  err => {
+    console.log();
 
-  console.log();
+    console.log(`linking child projects`);
 
-  console.log(`linking child projects`);
-
-  async.mapSeries(dependencies, (dependency, cb) => {
-    exec({
-      command: `npm link ${dependency.source}`,
-      dir: dependency.targetFolder,
-      displayDir: `${dependency.source}->${dependency.target}`,
-    }, (err) => {
-      if (err) return cb(err);
-      return cb();
-    });
-  }, (err) => {
-    if (err) throw err;
-
-  }); 
-
-});
+    async.mapSeries(
+      dependencies,
+      (dependency, cb) => {
+        exec(
+          {
+            command: `npm link ${dependency.source}`,
+            dir: dependency.targetFolder,
+            displayDir: `${dependency.source}->${dependency.target}`,
+          },
+          err => {
+            if (err) return cb(err);
+            return cb();
+          }
+        );
+      },
+      err => {
+        if (err) throw err;
+      }
+    );
+  }
+);

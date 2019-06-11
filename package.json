@@ -14,7 +14,17 @@
     "meta-npm-symlink": "./bin/meta-npm-symlink"
   },
   "scripts": {
-    "test": "mocha -R spec --recursive"
+    "commit": "git-cz",
+    "lint": "prettier --write \"bin/*\" index.js",
+    "test": "jest --config jest.json --coverage",
+    "test:coverage": "jest --config jest.json --coverage",
+    "test:watch": "jest --config jest.json --watch"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "repository": {
     "type": "git",
@@ -48,7 +58,15 @@
     "symlink-meta-dependencies": "^0.0.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "commitizen": "^3.1.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "husky": "^2.4.0",
+    "jest": "^24.8.0",
     "mocha": "6.1.1",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.0",
     "should": "13.2.3"
   }
 }

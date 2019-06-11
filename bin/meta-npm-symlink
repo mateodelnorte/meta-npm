@@ -12,6 +12,8 @@ if (process.argv[2] === '--help') {
 
 const symlinkCommand = findModuleBin('symlink-meta-dependencies');
 
-metaLoop(`${symlinkCommand} .`, { test: (folder) => {
-  return fs.existsSync(path.join(process.cwd(), folder, 'package.json')) === true;
-}});
+metaLoop(`${symlinkCommand} .`, {
+  test: folder => {
+    return fs.existsSync(path.join(process.cwd(), folder, 'package.json')) === true;
+  },
+});
