@@ -1,5 +1,6 @@
-# meta-npm
 [![Build Status](https://travis-ci.com/mateodelnorte/meta-npm.svg?branch=master)](https://travis-ci.com/mateodelnorte/meta-npm)
+
+# meta-npm
 
 npm plugin for [meta](https://github.com/mateodelnorte/meta)
 
