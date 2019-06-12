@@ -10,6 +10,7 @@ const debug = require('debug')('meta-npm');
 program
   .command('clean', 'delete the node_modules folder in meta and child repositories')
   .command('install', 'npm install meta and child repositories')
+  .command('update', 'npm update meta and child repositories')
   .command('link [--all]', 'npm link child repositories where used within child and meta repositories')
   .command('outdated', 'check outdated dependencies in meta and child repositories')
   .command('publish', 'npm publish meta and child repositories')
