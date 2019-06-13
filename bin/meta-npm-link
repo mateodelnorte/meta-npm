@@ -73,7 +73,9 @@ loop(
 
     console.log(`linking child projects`);
 
-    async.mapSeries(
+    const map = process.argv.indexOf('--parallel') > -1 ? async.map : async.mapSeries;
+
+    map(
       dependencies,
       (dependency, cb) => {
         exec(
