@@ -45,17 +45,17 @@
   },
   "homepage": "https://github.com/mateodelnorte/meta-npm#readme",
   "dependencies": {
-    "async": "^3.0.0",
-    "chalk": "^2.0.0",
-    "commander": "^2.9.0",
-    "debug": "^4.0.0",
-    "find-module-bin": "^1.0.0",
-    "get-meta-file": "^1.0.0",
-    "lodash": "^4.17.4",
-    "loop": "^3.1.1",
-    "meta-exec": "^1.0.0",
-    "meta-loop": "^1.0.0",
-    "symlink-meta-dependencies": "^1.0.0"
+    "async": "3.0.0",
+    "chalk": "2.0.0",
+    "commander": "2.9.0",
+    "debug": "4.0.0",
+    "find-module-bin": "1.0.0",
+    "get-meta-file": "1.0.0",
+    "lodash": "4.17.4",
+    "loop": "3.1.1",
+    "meta-exec": "1.0.0",
+    "meta-loop": "1.0.0",
+    "symlink-meta-dependencies": "1.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "8.0.0",
