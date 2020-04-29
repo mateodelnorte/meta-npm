@@ -46,7 +46,7 @@
   "homepage": "https://github.com/mateodelnorte/meta-npm#readme",
   "dependencies": {
     "async": "^3.0.0",
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "commander": "^2.9.0",
     "debug": "^4.0.0",
     "find-module-bin": "^1.0.0",
