@@ -4,27 +4,35 @@
 
 npm plugin for [meta](https://github.com/mateodelnorte/meta)
 
+Using `meta npm link && meta npm link --all` enables a lerna-like experience for local development by creating symlinks so each project uses the development version of any other project in the meta repo:
+
+For example, meta itself is developed in this way:
+
+```sh
+# install meta
+npm i -g meta
+
+# clone and enter the meta repo
+meta git clone git@github.com:mateodelnorte/meta.git
+cd ./meta
+
+# install plugins
+npm install
+
+# run install for all child repos
+meta npm install
+
+# create symlinks
+meta npm link
+
+# use the symlinks
+meta npm link --all
+```
+
 ## Usage
 
 ```
-➜  meta git:(master) ./bin/meta
-
-  Usage: meta [options] [command]
-
-
-  Commands:
-
-    git         manage your meta repo and child git repositories
-    npm         run npm commands against your meta and child repositories
-    help [cmd]  display help for [cmd]
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-```
-```
-➜  meta git:(master) ./bin/meta npm
+➜  meta npm
 
   Usage: meta-npm [options] [command]
 
@@ -43,3 +51,4 @@ npm plugin for [meta](https://github.com/mateodelnorte/meta)
     symlink       directly symlink meta and child repositories without using global npm link
     help [cmd]    display help for [cmd]
 ```
+
