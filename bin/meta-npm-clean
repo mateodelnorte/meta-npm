@@ -6,13 +6,26 @@ const loop = require('loop');
 const path = require('path');
 const util = require('util');
 
+const recursiveSearch = (obj, results = []) => {
+  const r = results;
+  Object.keys(obj).forEach(key => {
+    const value = obj[key];
+    if (typeof value !== 'object') {
+      r.push(key);
+    } else if (typeof value === 'object') {
+      recursiveSearch(value, r);
+    }
+  });
+  return r;
+};
+
 if (process.argv[2] === '--help') {
   return console.log(`\n  usage:\n\n    meta npm clean\n`);
 }
 
 const meta = getMetaFile();
-const projects = meta.projects;
-const folders = Object.keys(projects).map(folder => {
+const projects = recursiveSearch(meta.projects);
+const folders = projects.map(folder => {
   return path.resolve(folder);
 });
 

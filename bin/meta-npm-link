@@ -26,12 +26,25 @@ if (process.argv[2] === '--all') {
 }
 
 var meta = getMetaFile();
+const recursiveSearch = (obj, results = []) => {
+  const r = results;
+  Object.keys(obj).forEach(key => {
+    const value = obj[key];
+    if (typeof value !== 'object') {
+      r.push(key);
+    } else if (typeof value === 'object') {
+      recursiveSearch(value, r);
+    }
+  });
+  return r;
+};
+
 const metaLocation = path.join(process.cwd(), '.meta');
 const metaPackageJson = require(path.join(metaLocation, '..', 'package.json'));
 const packages = [];
-const projects = meta.projects;
+const projects = recursiveSearch(meta.projects);
 
-_.forEach(Object.keys(projects), folder => {
+_.forEach(projects, folder => {
   const childPackageJson = require(path.join(metaLocation, '..', folder, 'package.json'));
 
   if (all) {
