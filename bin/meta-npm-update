@@ -9,6 +9,8 @@ if (process.argv[2] === '--help') {
   return console.log(`\n  usage:\n\n    meta npm update\n`);
 }
 
-metaLoop('npm update', { test: (folder) => {
-  return fs.existsSync(path.join(process.cwd(), folder, 'package.json')) === true;
-}});
+metaLoop('npm update', {
+  test: folder => {
+    return fs.existsSync(path.join(process.cwd(), folder, 'package.json')) === true;
+  },
+});
