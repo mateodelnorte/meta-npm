@@ -58,7 +58,7 @@
     "symlink-meta-dependencies": "^1.2.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "9.0.0",
+    "@commitlint/cli": "9.1.2",
     "@commitlint/config-conventional": "10.0.0",
     "commitizen": "3.1.2",
     "cz-conventional-changelog": "2.1.0",
