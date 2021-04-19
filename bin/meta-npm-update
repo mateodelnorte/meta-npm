@@ -10,7 +10,7 @@ if (process.argv[2] === '--help') {
 }
 
 metaLoop('npm update', {
-  test: folder => {
+  test: (folder) => {
     return fs.existsSync(path.join(process.cwd(), folder, 'package.json')) === true;
   },
 });

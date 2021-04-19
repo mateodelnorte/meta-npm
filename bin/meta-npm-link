@@ -31,7 +31,7 @@ const metaPackageJson = require(path.join(metaLocation, '..', 'package.json'));
 const packages = [];
 const projects = meta.projects;
 
-_.forEach(Object.keys(projects), folder => {
+_.forEach(Object.keys(projects), (folder) => {
   const childPackageJson = require(path.join(metaLocation, '..', folder, 'package.json'));
 
   if (all) {
@@ -56,7 +56,7 @@ packages.push({
 const dependencies = getPackageDependencies(packages);
 
 let uniqueFoldersToLink = _.union(
-  dependencies.map(d => {
+  dependencies.map((d) => {
     return d.sourceFolder;
   })
 );
@@ -68,7 +68,7 @@ loop(
     command: 'npm link',
     directories: uniqueFoldersToLink,
   },
-  err => {
+  (err) => {
     console.log();
 
     console.log(`linking child projects`);
@@ -84,13 +84,13 @@ loop(
             dir: dependency.targetFolder,
             displayDir: `${dependency.source}->${dependency.target}`,
           },
-          err => {
+          (err) => {
             if (err) return cb(err);
             return cb();
           }
         );
       },
-      err => {
+      (err) => {
         if (err) throw err;
       }
     );

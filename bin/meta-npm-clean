@@ -12,7 +12,7 @@ if (process.argv[2] === '--help') {
 
 const meta = getMetaFile();
 const projects = meta.projects;
-const folders = Object.keys(projects).map(folder => {
+const folders = Object.keys(projects).map((folder) => {
   return path.resolve(folder);
 });
 

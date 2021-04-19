@@ -13,7 +13,7 @@ if (process.argv[2] === '--help') {
 const symlinkCommand = findModuleBin('symlink-meta-dependencies');
 
 metaLoop(`${symlinkCommand} .`, {
-  test: folder => {
+  test: (folder) => {
     return fs.existsSync(path.join(process.cwd(), folder, 'package.json')) === true;
   },
 });
